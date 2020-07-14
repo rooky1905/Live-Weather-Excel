@@ -18,7 +18,11 @@ while True:
             else:
                 unit = 'metric'
             response = requests.get('http://api.openweathermap.org/data/2.5/weather?apikey=4a2360d14bf33378079d2e2d49e35ddb&mode=json&units={}&q={}'.format(unit,cell_obj.value))
+            # print(response.json())
             sheet_obj.cell(column=4 , row=i, value=response.json()['main']['temp'])
+            sheet_obj.cell(column=5 , row=i, value=response.json()['main']['humidity'])
+            sheet_obj.cell(column=6 , row=i, value=response.json()['main']['pressure'])
+            sheet_obj.cell(column=7 , row=i, value=response.json()['weather'][0]['description'])
         else:
             continue
     wb.save('test1.xlsx')
